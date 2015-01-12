@@ -11,10 +11,13 @@ void Game::Start(void)
     _mainWindow.setKeyRepeatEnabled(false);
     
 	PlayerChar *player1 = new PlayerChar();
-	player1->Load(resourcePath() + "player.jpg");
+    AIChar *ai1 = new AIChar();
+//	player1->Load(resourcePath() + "player.jpg");
 	player1->SetPosition((1024/2)-45,(768/2));
+	ai1->SetPosition((1024/5)-45,(768/5));
 	
 	_gameObjectManager.Add("Player1",player1);
+    _gameObjectManager.Add("AI1",ai1);
     _gameState= Game::ShowingSplash;
     
     while(!IsExiting())
@@ -53,6 +56,7 @@ void Game::GameLoop()
 		case Game::ShowingMenu:
         {
             ShowMenu();
+            _clock.restart();
             break;
         }
 		case Game::ShowingSplash:
@@ -66,12 +70,16 @@ void Game::GameLoop()
             _mainWindow.clear(sf::Color(0,0,0));
             
             sf::Time elapsed = _clock.restart();
+
             _gameObjectManager.UpdateAll(elapsed);
             _gameObjectManager.DrawAll(_mainWindow);
             
             _mainWindow.display();
             
-            if(currentEvent.type == sf::Event::Closed) _gameState = Game::Exiting;
+            if(currentEvent.type == sf::Event::Closed) {
+                std::cout<<"Exiting"<<std::endl;
+                _gameState = Game::Exiting;
+            }
             
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
                 //ResetGame();
@@ -110,6 +118,11 @@ void Game::ShowMenu()
 			_gameState = Game::Playing;
 			break;
 	}
+}
+
+const GameObjectManager& Game::GetGameObjectManager()
+{
+	return _gameObjectManager;
 }
 
 sf::Clock Game::_clock;

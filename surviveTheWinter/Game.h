@@ -13,6 +13,7 @@
 #include "SplashScreen.h"
 #include "MainMenu.h"
 #include "PlayerChar.h"
+#include "AIChar.h"
 #include "GameObjectManager.h"
 
 
@@ -24,6 +25,7 @@ public:
 	static void Start();
     static sf::RenderWindow& GetWindow();
 //	const static sf::input& GetInput();
+    const static GameObjectManager& GetGameObjectManager();
 	const static int SCREEN_WIDTH = 1024;
 	const static int SCREEN_HEIGHT = 768;
     

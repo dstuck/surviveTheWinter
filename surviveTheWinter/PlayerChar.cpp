@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "PlayerChar.h"
 #include "Game.h"
+#include "VectorUtil.h"
 
 
 PlayerChar::PlayerChar():
@@ -74,10 +75,12 @@ void PlayerChar::Update(float elapsedTime)
 		_velocity.y = 0; // Stop at bound
 	}
 //  Normalize _velocity
-    if(_velocity.x !=0 && _velocity.y !=0) {
-        _velocity.x /= 1.41421356;
-        _velocity.y /= 1.41421356;
-    }
+//    if(_velocity.x !=0 && _velocity.y !=0) {
+//        _velocity.x /= 1.41421356;
+//        _velocity.y /= 1.41421356;
+//    }
+    
+//    std::cout<<"Player velocity is ("<<_velocity.x<<","<<_velocity.y<<")"<<std::endl;
 	
 	GetSprite().move(_velocity * elapsedTime);
 }

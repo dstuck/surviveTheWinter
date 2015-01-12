@@ -16,6 +16,11 @@
 		33108E091A625D6400E80745 /* PlayerChar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33108E071A625D6400E80745 /* PlayerChar.cpp */; };
 		33108E0B1A62F88100E80745 /* player.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33108E0A1A62F88100E80745 /* player.jpg */; };
 		33108E0E1A62F9FF00E80745 /* GameObjectManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33108E0C1A62F9FF00E80745 /* GameObjectManager.cpp */; };
+		33108E111A635B9500E80745 /* AIChar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33108E0F1A635B9500E80745 /* AIChar.cpp */; };
+		33108E131A635E7B00E80745 /* monster.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33108E121A635E7B00E80745 /* monster.jpg */; };
+		33108E161A63619100E80745 /* AIMove.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33108E141A63619100E80745 /* AIMove.cpp */; };
+		33108E191A636F2000E80745 /* MoveWalk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33108E171A636F2000E80745 /* MoveWalk.cpp */; };
+		33108E1D1A63859B00E80745 /* VectorUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33108E1B1A63859B00E80745 /* VectorUtil.cpp */; };
 		3339E25A1A61E5CD001A03F2 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3339E2591A61E5CD001A03F2 /* ResourcePath.mm */; };
 		3339E25D1A61E5CD001A03F2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3339E25C1A61E5CD001A03F2 /* main.cpp */; };
 		3339E2601A61E5CD001A03F2 /* SplashScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 3339E25F1A61E5CD001A03F2 /* SplashScreen.png */; };
@@ -41,6 +46,15 @@
 		33108E0A1A62F88100E80745 /* player.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = player.jpg; sourceTree = "<group>"; };
 		33108E0C1A62F9FF00E80745 /* GameObjectManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameObjectManager.cpp; sourceTree = "<group>"; };
 		33108E0D1A62F9FF00E80745 /* GameObjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameObjectManager.h; sourceTree = "<group>"; };
+		33108E0F1A635B9500E80745 /* AIChar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AIChar.cpp; sourceTree = "<group>"; };
+		33108E101A635B9500E80745 /* AIChar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIChar.h; sourceTree = "<group>"; };
+		33108E121A635E7B00E80745 /* monster.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = monster.jpg; sourceTree = "<group>"; };
+		33108E141A63619100E80745 /* AIMove.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AIMove.cpp; sourceTree = "<group>"; };
+		33108E151A63619100E80745 /* AIMove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIMove.h; sourceTree = "<group>"; };
+		33108E171A636F2000E80745 /* MoveWalk.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MoveWalk.cpp; sourceTree = "<group>"; };
+		33108E181A636F2000E80745 /* MoveWalk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoveWalk.h; sourceTree = "<group>"; };
+		33108E1B1A63859B00E80745 /* VectorUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VectorUtil.cpp; sourceTree = "<group>"; };
+		33108E1C1A63859B00E80745 /* VectorUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VectorUtil.h; sourceTree = "<group>"; };
 		3339E2541A61E5CD001A03F2 /* surviveTheWinter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = surviveTheWinter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3339E2581A61E5CD001A03F2 /* surviveTheWinter-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "surviveTheWinter-Info.plist"; sourceTree = "<group>"; };
 		3339E2591A61E5CD001A03F2 /* ResourcePath.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
@@ -101,6 +115,14 @@
 				33108E081A625D6400E80745 /* PlayerChar.h */,
 				33108E0C1A62F9FF00E80745 /* GameObjectManager.cpp */,
 				33108E0D1A62F9FF00E80745 /* GameObjectManager.h */,
+				33108E0F1A635B9500E80745 /* AIChar.cpp */,
+				33108E101A635B9500E80745 /* AIChar.h */,
+				33108E141A63619100E80745 /* AIMove.cpp */,
+				33108E151A63619100E80745 /* AIMove.h */,
+				33108E171A636F2000E80745 /* MoveWalk.cpp */,
+				33108E181A636F2000E80745 /* MoveWalk.h */,
+				33108E1B1A63859B00E80745 /* VectorUtil.cpp */,
+				33108E1C1A63859B00E80745 /* VectorUtil.h */,
 			);
 			path = surviveTheWinter;
 			sourceTree = "<group>";
@@ -116,6 +138,7 @@
 		3339E25E1A61E5CD001A03F2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				33108E121A635E7B00E80745 /* monster.jpg */,
 				33108E0A1A62F88100E80745 /* player.jpg */,
 				33108DFF1A61F6F700E80745 /* MainMenu.png */,
 				3339E25F1A61E5CD001A03F2 /* SplashScreen.png */,
@@ -183,6 +206,7 @@
 				3339E2621A61E5CD001A03F2 /* nice_music.ogg in Resources */,
 				3339E2601A61E5CD001A03F2 /* SplashScreen.png in Resources */,
 				33108E0B1A62F88100E80745 /* player.jpg in Resources */,
+				33108E131A635E7B00E80745 /* monster.jpg in Resources */,
 				33108E001A61F6F700E80745 /* MainMenu.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -213,12 +237,16 @@
 				33108DF21A61EC8500E80745 /* Game.cpp in Sources */,
 				33108DFE1A61F4AA00E80745 /* MainMenu.cpp in Sources */,
 				33108E091A625D6400E80745 /* PlayerChar.cpp in Sources */,
+				33108E111A635B9500E80745 /* AIChar.cpp in Sources */,
 				33108DF51A61ED0200E80745 /* stdafx.cpp in Sources */,
+				33108E161A63619100E80745 /* AIMove.cpp in Sources */,
 				3339E25D1A61E5CD001A03F2 /* main.cpp in Sources */,
 				3339E25A1A61E5CD001A03F2 /* ResourcePath.mm in Sources */,
 				33108E031A622C9700E80745 /* VisibleGameObject.cpp in Sources */,
 				33108DF81A61F03A00E80745 /* SplashScreen.cpp in Sources */,
 				33108E0E1A62F9FF00E80745 /* GameObjectManager.cpp in Sources */,
+				33108E191A636F2000E80745 /* MoveWalk.cpp in Sources */,
+				33108E1D1A63859B00E80745 /* VectorUtil.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
