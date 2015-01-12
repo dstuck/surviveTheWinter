@@ -1,0 +1,118 @@
+#include "stdafx.h"
+#include "Game.h"
+
+
+void Game::Start(void)
+{
+    if(_gameState != Uninitialized)
+        return;
+    
+    _mainWindow.create(sf::VideoMode(1024,768,32),"Pang!");
+    _mainWindow.setKeyRepeatEnabled(false);
+    
+	PlayerChar *player1 = new PlayerChar();
+	player1->Load(resourcePath() + "player.jpg");
+	player1->SetPosition((1024/2)-45,(768/2));
+	
+	_gameObjectManager.Add("Player1",player1);
+    _gameState= Game::ShowingSplash;
+    
+    while(!IsExiting())
+    {
+        GameLoop();
+    }
+    
+    _mainWindow.close();
+}
+
+bool Game::IsExiting()
+{
+    if(_gameState == Game::Exiting)
+        return true;
+    else
+        return false;
+}
+
+sf::RenderWindow& Game::GetWindow()
+{
+	return _mainWindow;
+}
+
+//const sf::input& Game::GetInput()
+//{
+//	return _mainWindow.GetInput();
+//}
+
+void Game::GameLoop()
+{
+    sf::Event currentEvent;
+	_mainWindow.pollEvent(currentEvent);
+    
+	switch(_gameState)
+	{
+		case Game::ShowingMenu:
+        {
+            ShowMenu();
+            break;
+        }
+		case Game::ShowingSplash:
+        {
+            ShowSplashScreen();
+//            _gameState = Game::ShowingMenu;
+            break;
+        }
+		case Game::Playing:
+        {
+            _mainWindow.clear(sf::Color(0,0,0));
+            
+            sf::Time elapsed = _clock.restart();
+            _gameObjectManager.UpdateAll(elapsed);
+            _gameObjectManager.DrawAll(_mainWindow);
+            
+            _mainWindow.display();
+            
+            if(currentEvent.type == sf::Event::Closed) _gameState = Game::Exiting;
+            
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+                //ResetGame();
+                ShowMenu();
+            }
+//                if(currentEvent.type == sf::Event::KeyPressed)
+//                {
+//                    if(currentEvent.key.code == sf::Keyboard::Escape) {
+////                        std::cout << "Escape key pressed!" << std::endl;
+//                        ShowMenu();
+//                    }
+//                }
+            
+            break;
+        }
+	}
+}
+
+void Game::ShowSplashScreen()
+{
+	SplashScreen splashScreen;
+	splashScreen.Show(_mainWindow);
+	_gameState = Game::ShowingMenu;
+}
+
+void Game::ShowMenu()
+{
+	MainMenu mainMenu;
+	MainMenu::MenuResult result = mainMenu.Show(_mainWindow);
+	switch(result)
+	{
+        case MainMenu::Exit:
+			_gameState = Game::Exiting;
+			break;
+		case MainMenu::Play:
+			_gameState = Game::Playing;
+			break;
+	}
+}
+
+sf::Clock Game::_clock;
+Game::GameState Game::_gameState = Uninitialized;
+sf::RenderWindow Game::_mainWindow;
+GameObjectManager Game::_gameObjectManager;
