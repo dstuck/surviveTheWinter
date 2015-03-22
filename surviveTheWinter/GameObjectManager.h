@@ -11,9 +11,11 @@ public:
 	void Remove(std::string name);
 	int GetObjectCount() const;
 	VisibleGameObject* Get(std::string name) const;
+    std::map<std::string, VisibleGameObject*> GetMap() const;
     
 	void DrawAll(sf::RenderWindow& renderWindow);
     void UpdateAll(sf::Time);
+    void RemoveDead();
     
 private:
 	std::map<std::string, VisibleGameObject*> _gameObjects;

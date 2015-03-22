@@ -1,28 +1,29 @@
 //
-//  AIChar.h
+//  EnemyChar.h
 //  surviveTheWinter
 //
-//  Created by David Stuck on 1/11/15.
+//  Created by David Stuck on 1/12/15.
 //  Copyright (c) 2015 David Stuck. All rights reserved.
 //
 
-#ifndef __surviveTheWinter__AIChar__
-#define __surviveTheWinter__AIChar__
+#ifndef __surviveTheWinter__EnemyChar__
+#define __surviveTheWinter__EnemyChar__
+
 
 #include <iostream>
 #include "Char.h"
 #include "AIMove.h"
 
-class AIChar :
+class EnemyChar :
 public Char
 {
 public:
-	AIChar();
-	~AIChar();
+	EnemyChar();
+	~EnemyChar();
     
     void Update(float elapsedTime);
 //	void Draw(sf::RenderWindow& rw);
-    void ModHealth(float change, sf::Vector2f dir = sf::Vector2f(-1,-1));
+//    void ModHealth(float);
 	
     sf::Vector2f GetVelocity() const;
     
@@ -39,4 +40,4 @@ private:
     AIMove * _curMove;
 };
 
-#endif /* defined(__surviveTheWinter__AIChar__) */
+#endif /* defined(__surviveTheWinter__EnemyChar__) */

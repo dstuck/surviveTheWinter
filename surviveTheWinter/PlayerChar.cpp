@@ -7,7 +7,8 @@
 PlayerChar::PlayerChar():
 _velocity(0.0,0.0),
 _maxSpeed(600.0f),
-_curSpeed(600.0f)
+_curSpeed(600.0f),
+Char(100.0,100.0)
 {
 	Load(resourcePath() + "player.jpg");
 	assert(IsLoaded());
@@ -20,10 +21,18 @@ PlayerChar::~PlayerChar()
 {
 }
 
-void PlayerChar::Draw(sf::RenderWindow & rw)
-{
-	VisibleGameObject::Draw(rw);
-}
+//void PlayerChar::Draw(sf::RenderWindow & rw)
+//{
+//	VisibleGameObject::Draw(rw);
+////Draw health bar
+//    sf::Vector2f rectVec(_health,10);
+//    sf::RectangleShape healthBar(rectVec);
+//    healthBar.setFillColor(sf::Color::Green);
+//    healthBar.setOutlineColor(sf::Color::Black);
+//    healthBar.setOrigin(_maxHealth/2,5);
+//    healthBar.setPosition(GetPosition().x,GetPosition().y + GetSprite().getGlobalBounds().height/2.0 + 10);
+//    rw.draw(healthBar);
+//}
 
 sf::Vector2f PlayerChar::GetVelocity() const
 {
@@ -58,22 +67,22 @@ void PlayerChar::Update(float elapsedTime)
 //    
 //	if(_velocity < -_maxSpeed)
 //		_velocity = -_maxSpeed;
-    
-	sf::Vector2f pos = this->GetPosition();
-    
-	if(pos.x  < GetSprite().getGlobalBounds().width/2 && _velocity.x < 0) {
-        _velocity.x = 0; // Stop at bound
-    }
-    if(pos.x > (Game::SCREEN_WIDTH - GetSprite().getGlobalBounds().width/2) && _velocity.x > 0) {
-		_velocity.x = 0; // Stop at bound
-	}
-    
-	if(pos.y  < GetSprite().getGlobalBounds().height/2 && _velocity.y < 0) {
-        _velocity.y = 0; // Stop at bound
-	}
-    if(pos.y > (Game::SCREEN_HEIGHT - GetSprite().getGlobalBounds().height/2) && _velocity.y > 0) {
-		_velocity.y = 0; // Stop at bound
-	}
+//    
+//	sf::Vector2f pos = this->GetPosition();
+//    
+//	if(pos.x  < GetSprite().getGlobalBounds().width/2 && _velocity.x < 0) {
+//        _velocity.x = 0; // Stop at bound
+//    }
+//    if(pos.x > (Game::SCREEN_WIDTH - GetSprite().getGlobalBounds().width/2) && _velocity.x > 0) {
+//		_velocity.x = 0; // Stop at bound
+//	}
+//    
+//	if(pos.y  < GetSprite().getGlobalBounds().height/2 && _velocity.y < 0) {
+//        _velocity.y = 0; // Stop at bound
+//	}
+//    if(pos.y > (Game::SCREEN_HEIGHT - GetSprite().getGlobalBounds().height/2) && _velocity.y > 0) {
+//		_velocity.y = 0; // Stop at bound
+//	}
 //  Normalize _velocity
 //    if(_velocity.x !=0 && _velocity.y !=0) {
 //        _velocity.x /= 1.41421356;
@@ -81,6 +90,8 @@ void PlayerChar::Update(float elapsedTime)
 //    }
     
 //    std::cout<<"Player velocity is ("<<_velocity.x<<","<<_velocity.y<<")"<<std::endl;
-	
-	GetSprite().move(_velocity * elapsedTime);
+    
+//	ModHealth(-1*elapsedTime);
+//	GetSprite().move(_velocity * elapsedTime);
+    CharMove(_velocity * elapsedTime);
 }

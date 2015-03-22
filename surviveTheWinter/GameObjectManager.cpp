@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "GameObjectManager.h"
 #include "Game.h"
+#include "Char.h"
 
 
 
@@ -42,6 +43,9 @@ int GameObjectManager::GetObjectCount() const
 	return _gameObjects.size();
 }
 
+std::map<std::string, VisibleGameObject*> GameObjectManager::GetMap() const {
+    return _gameObjects;
+}
 
 void GameObjectManager::DrawAll(sf::RenderWindow& renderWindow)
 {
@@ -65,4 +69,17 @@ void GameObjectManager::UpdateAll(sf::Time timeDelta)
         itr++;
     }
     
+}
+
+void GameObjectManager::RemoveDead() {
+//      Remove dead characters
+    for(std::map<std::string,VisibleGameObject*>::const_iterator iter = _gameObjects.begin(); iter!=_gameObjects.end(); iter++) {
+        if(dynamic_cast<Char*>(iter->second)!=NULL) {
+            if(dynamic_cast<Char*>(iter->second)->GetHealth()<=0) {
+                delete iter->second;
+                _gameObjects.erase(iter);
+                return;
+            }
+        }
+    }
 }

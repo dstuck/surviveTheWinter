@@ -1,9 +1,9 @@
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "VisibleGameObject.h"
+#include <cmath>
 
-
-VisibleGameObject::VisibleGameObject() :
-_isLoaded(false)
+VisibleGameObject::VisibleGameObject(bool solid) :
+_isLoaded(false),_isSolid(solid)
 {
 }
 
@@ -67,4 +67,30 @@ sf::Sprite& VisibleGameObject::GetSprite()
 bool VisibleGameObject::IsLoaded() const
 {
 	return _isLoaded;
+}
+
+bool VisibleGameObject::IsTouching(VisibleGameObject obj, float thresh) {
+//    See if x distance is less than sum of half width and same for y
+    return (fabs(GetPosition().x-obj.GetPosition().x) < GetSprite().getGlobalBounds().width/2+obj.GetSprite().getGlobalBounds().width/2 + thresh) && (fabs(GetPosition().y-obj.GetPosition().y) < GetSprite().getGlobalBounds().height/2+obj.GetSprite().getGlobalBounds().height/2 + thresh);
+}
+
+bool VisibleGameObject::IsBelow(VisibleGameObject obj, float thresh) {
+    return ((fabs(GetPosition().x-obj.GetPosition().x) < GetSprite().getGlobalBounds().width/2+obj.GetSprite().getGlobalBounds().width/2 + thresh) && GetPosition().y > obj.GetPosition().y);
+}
+
+bool VisibleGameObject::IsAbove(VisibleGameObject obj, float thresh) {
+    return ((fabs(GetPosition().x-obj.GetPosition().x) < GetSprite().getGlobalBounds().width/2+obj.GetSprite().getGlobalBounds().width/2 + thresh) && GetPosition().y < obj.GetPosition().y);
+}
+
+bool VisibleGameObject::IsLeftOf(VisibleGameObject obj, float thresh) {
+    return ((fabs(GetPosition().y-obj.GetPosition().y) < GetSprite().getGlobalBounds().height/2+obj.GetSprite().getGlobalBounds().height/2 + thresh) && GetPosition().x < obj.GetPosition().x);
+}
+
+bool VisibleGameObject::IsRightOf(VisibleGameObject obj, float thresh) {
+    return ((fabs(GetPosition().y-obj.GetPosition().y) < GetSprite().getGlobalBounds().height/2+obj.GetSprite().getGlobalBounds().height/2 + thresh) && GetPosition().x > obj.GetPosition().x);
+}
+
+
+bool VisibleGameObject::IsSolid() {
+    return _isSolid;
 }

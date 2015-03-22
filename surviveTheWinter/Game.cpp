@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Game.h"
+#include "Char.h"
 
 
 void Game::Start(void)
@@ -12,12 +13,14 @@ void Game::Start(void)
     
 	PlayerChar *player1 = new PlayerChar();
     AIChar *ai1 = new AIChar();
-//	player1->Load(resourcePath() + "player.jpg");
-	player1->SetPosition((1024/2)-45,(768/2));
-	ai1->SetPosition((1024/5)-45,(768/5));
+    EnemyChar *enemy1 = new EnemyChar();
+	player1->SetPosition((1024/2),(768/2));
+	ai1->SetPosition((1024*.75),(768*.2));
+    enemy1->SetPosition(100,100);
 	
 	_gameObjectManager.Add("Player1",player1);
     _gameObjectManager.Add("AI1",ai1);
+    _gameObjectManager.Add("enemy1",enemy1);
     _gameState= Game::ShowingSplash;
     
     while(!IsExiting())
@@ -26,6 +29,10 @@ void Game::Start(void)
     }
     
     _mainWindow.close();
+}
+
+void Game::ExitGame() {
+    _gameState = Game::Exiting;
 }
 
 bool Game::IsExiting()
@@ -92,7 +99,8 @@ void Game::GameLoop()
 //                        ShowMenu();
 //                    }
 //                }
-            
+            _gameObjectManager.RemoveDead();
+
             break;
         }
 	}

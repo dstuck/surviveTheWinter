@@ -1,12 +1,13 @@
 //
-//  AIChar.cpp
+//  EnemyChar.cpp
 //  surviveTheWinter
 //
-//  Created by David Stuck on 1/11/15.
+//  Created by David Stuck on 1/12/15.
 //  Copyright (c) 2015 David Stuck. All rights reserved.
 //
 
 #include "stdafx.h"
+#include "EnemyChar.h"
 #include "AIChar.h"
 #include "Game.h"
 #include "MoveWalk.h"
@@ -16,7 +17,7 @@
 #include <time.h>
 
 
-AIChar::AIChar():
+EnemyChar::EnemyChar():
 _totalTime(0.0),
 _velocity(0.0,0.0),
 _maxSpeed(400.0f),
@@ -26,7 +27,7 @@ Char(50.0,50.0)
     sf::Vector2f zeroV(0,0);
     _curMove = new MoveWalk(zeroV,1);
     _decisionTime = _curMove->GetTime();
-	Load(resourcePath() + "monster.jpg");
+	Load(resourcePath() + "enemy.jpg");
 	assert(IsLoaded());
     srand (time(NULL));
     
@@ -34,11 +35,11 @@ Char(50.0,50.0)
     
 }
 
-AIChar::~AIChar()
+EnemyChar::~EnemyChar()
 {
 }
 
-//void AIChar::Draw(sf::RenderWindow & rw)
+//void EnemyChar::Draw(sf::RenderWindow & rw)
 //{
 //	VisibleGameObject::Draw(rw);
 //    //Draw health bar
@@ -51,47 +52,20 @@ AIChar::~AIChar()
 //    rw.draw(healthBar);
 //}
 
-sf::Vector2f AIChar::GetVelocity() const
+sf::Vector2f EnemyChar::GetVelocity() const
 {
 	return _velocity;
 }
 
-void AIChar::ModHealth(float change, sf::Vector2f dir) {
-    _health += change;
-    if(_health>_maxHealth){
-        _health=_maxHealth;
-    }
-    else if(_health<0){
-        std::cout << "AI Died!" << std::endl;
-//        Game::ExitGame();
-    }
-//    Run away if hurt
-    if(change<0) {
-        if(dir.x>0) {
-            if(_curMove!=NULL){
-                delete _curMove;
-            }
-            int speedRange = 100;
-            sf::Vector2f bias = GetPosition() - dir;
-            VectorUtil::VNormalize(bias);
-            VectorUtil::VScale(bias,300);
-            sf::Vector2f moveVec(rand()%(2*speedRange)-speedRange+bias.x,rand()%(2*speedRange)-speedRange+bias.y);
-            MoveWalk * nMove = new MoveWalk(moveVec,.4);
-            _curMove = nMove;
-        }
-    }
-}
-
-AIMove * AIChar::GetNextMove() {
+AIMove * EnemyChar::GetNextMove() {
     if(_curMove!=NULL){
         delete _curMove;
     }
     
-    double timeStep = .3;
     double timeRange = 0.3;
-    double timeMid = 0.4;
+    double timeMid = 0.8;
     double tooClose = 300.0;
-    int speedRange = 200;
+    int speedRange = 100;
     sf::Vector2f bias(0,0);
     
     PlayerChar* thePlayer = dynamic_cast<PlayerChar*>(Game::GetGameObjectManager().Get("Player1"));
@@ -99,50 +73,30 @@ AIMove * AIChar::GetNextMove() {
         sf::Vector2f pVec = thePlayer->GetPosition();
         float pDist = VectorUtil::VDist(pVec, GetPosition());
         
-        if(pDist<tooClose) {
-            bias = GetPosition()-pVec;
-            VectorUtil::VNormalize(bias);
-            speedRange = 300;
-            VectorUtil::VScale(bias,float(speedRange)/1.5);
-            timeMid = .6;
-            //        timeStep = float(rand())/RAND_MAX*timeRange/2+timeMid;
-        }
-        else {
-            bias = pVec-GetPosition();
-            VectorUtil::VNormalize(bias);
-            VectorUtil::VScale(bias,float(speedRange)/4.0);
-        }
+        bias = GetPosition()-pVec;
+        VectorUtil::VNormalize(bias);
+        VectorUtil::VScale(bias,float(speedRange)/10);
     }
-        
+    
     sf::Vector2f moveVec(rand()%(2*speedRange)-speedRange+bias.x,rand()%(2*speedRange)-speedRange+bias.y);
     MoveWalk * nMove = new MoveWalk(moveVec,float(rand())/RAND_MAX*timeRange/2+timeMid);
     return nMove;
 }
 
-void AIChar::Update(float elapsedTime)
+void EnemyChar::Update(float elapsedTime)
 {
     _totalTime += elapsedTime;
-//    std::cout << "elapsedTime = "<<elapsedTime << std::endl;
+    //    std::cout << "elapsedTime = "<<elapsedTime << std::endl;
     _decisionTime -= elapsedTime;
-//    std::cout << "decisionTime = "<< _decisionTime << std::endl;
+    //    std::cout << "decisionTime = "<< _decisionTime << std::endl;
     if(_decisionTime <= 0.0) {
         _curMove = GetNextMove();
         _decisionTime = _curMove->GetTime();
     }
     _velocity = _curMove->GetVelocity();
     
-//    _curMove->PrintMove();
+    //    _curMove->PrintMove();
     
-    //  Normalize _velocity
-//    if(_velocity.x !=0 && _velocity.y !=0) {
-//        double norm = VectorUtil::VNorm(_velocity);
-//        _velocity.x /= norm;
-//        _velocity.y /= norm;
-//        _velocity *= _curSpeed;
-//    }
-//    VectorUtil::VNormalize(_velocity);
-//    _velocity *= _curSpeed;
-	
 //    sf::Vector2f pos = this->GetPosition();
 //    
 //	if(pos.x  < GetSprite().getGlobalBounds().width/2 && _velocity.x < 0) {
@@ -157,8 +111,25 @@ void AIChar::Update(float elapsedTime)
 //    if(pos.y > (Game::SCREEN_HEIGHT - GetSprite().getGlobalBounds().height/2) && _velocity.y > 0) {
 //		_velocity.y = 0; // Stop at bound
 //	}
-    
-//    std::cout<<"velocity is ("<<_velocity.x<<","<<_velocity.y<<")"<<std::endl;
+//    
+    //    std::cout<<"velocity is ("<<_velocity.x<<","<<_velocity.y<<")"<<std::endl;
     
 	CharMove(_velocity * elapsedTime);
+    
+//    Damage everyone!
+    AIChar* theAI = dynamic_cast<AIChar*>(Game::GetGameObjectManager().Get("AI1"));
+//    std::cout << VectorUtil::VDist(GetPosition(),theAI->GetPosition()) << std::endl;
+    if(theAI!=NULL) {
+        if(IsTouching(*theAI,20)) {
+//            std::cout << "Touching!!" << std::endl;
+            theAI->ModHealth(-5*elapsedTime,GetPosition());
+       
+        }
+    }
+    PlayerChar* thePlayer = dynamic_cast<PlayerChar*>(Game::GetGameObjectManager().Get("Player1"));
+    if(thePlayer!=NULL) {
+        if(IsTouching(*thePlayer,20)) {
+            thePlayer->ModHealth(-10*elapsedTime);
+        }
+    }
 }
