@@ -4,11 +4,9 @@
 #include "VectorUtil.h"
 
 
-PlayerChar::PlayerChar():
-_velocity(0.0,0.0),
-_maxSpeed(600.0f),
-_curSpeed(600.0f),
-Char(100.0,100.0)
+PlayerChar::PlayerChar(float x, float y) : _velocity(0.0,0.0), _maxSpeed(600.0f),
+                                           _curSpeed(600.0f),
+                                           Char(100.0,100.0, x, y)
 {
 	Load(resourcePath() + "player.jpg");
 	assert(IsLoaded());

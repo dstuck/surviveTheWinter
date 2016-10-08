@@ -6,11 +6,10 @@ class PlayerChar :
 public Char
 {
 public:
-	PlayerChar();
+	PlayerChar(float, float);
 	~PlayerChar();
     
     void Update(float elapsedTime);
-//	void Draw(sf::RenderWindow& rw);
 //    float GetHealth();
 //    void ModHealth(float);
 	
@@ -18,7 +17,7 @@ public:
     
 private:
     sf::Vector2f _velocity;
-	float _maxSpeed;
+    float _maxSpeed;
     float _curSpeed;
 //    float _health;
 //    float _maxHealth;

@@ -11,14 +11,14 @@ void Game::Start(void)
     _mainWindow.create(sf::VideoMode(1024,768,32),"Pang!");
     _mainWindow.setKeyRepeatEnabled(false);
     
-	PlayerChar *player1 = new PlayerChar();
-    AIChar *ai1 = new AIChar();
-    EnemyChar *enemy1 = new EnemyChar();
-	player1->SetPosition((1024/2),(768/2));
-	ai1->SetPosition((1024*.75),(768*.2));
-    enemy1->SetPosition(100,100);
+    PlayerChar *player1 = new PlayerChar((1024/2), (768/2));
+    AIChar *ai1 = new AIChar((1024*.75),(768*.2));
+    EnemyChar *enemy1 = new EnemyChar(100,100);
+//    player1->SetPosition((1024/2),(768/2));
+//    ai1->SetPosition((1024*.75),(768*.2));
+//    enemy1->SetPosition(100,100);
 	
-	_gameObjectManager.Add("Player1",player1);
+    _gameObjectManager.Add("Player1",player1);
     _gameObjectManager.Add("AI1",ai1);
     _gameObjectManager.Add("enemy1",enemy1);
     _gameState= Game::ShowingSplash;

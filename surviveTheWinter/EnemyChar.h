@@ -18,7 +18,7 @@ class EnemyChar :
 public Char
 {
 public:
-	EnemyChar();
+	EnemyChar(float, float);
 	~EnemyChar();
     
     void Update(float elapsedTime);

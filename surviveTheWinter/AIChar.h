@@ -17,11 +17,10 @@ class AIChar :
 public Char
 {
 public:
-	AIChar();
-	~AIChar();
+    AIChar(float x, float y);
+    ~AIChar();
     
     void Update(float elapsedTime);
-//	void Draw(sf::RenderWindow& rw);
     void ModHealth(float change, sf::Vector2f dir = sf::Vector2f(-1,-1));
 	
     sf::Vector2f GetVelocity() const;
@@ -30,7 +29,7 @@ private:
     AIMove * GetNextMove();
     
     sf::Vector2f _velocity;
-	float _maxSpeed;
+    float _maxSpeed;
     float _curSpeed;
     float _totalTime;
     float _decisionTime;

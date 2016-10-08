@@ -10,12 +10,10 @@
 #include "stdafx.h"
 #include "Game.h"
 
-Char::Char(float h, float mh):
-_health(h),
-_maxHealth(mh),
-VisibleGameObject(true)
+Char::Char(float h, float mh, float x, float y)
+    : _health(h), _maxHealth(mh), VisibleGameObject(true)
 {
-    
+    SetPosition(x, y);
 }
 
 Char::~Char()
@@ -24,7 +22,7 @@ Char::~Char()
 
 void Char::Draw(sf::RenderWindow & rw)
 {
-	VisibleGameObject::Draw(rw);
+    VisibleGameObject::Draw(rw);
     //Draw health bar
     if(_health<_maxHealth) {
         sf::Vector2f rectVec(_maxHealth,10);

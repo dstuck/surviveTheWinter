@@ -13,13 +13,12 @@
 #include "VisibleGameObject.h"
 #include "AIMove.h"
 
-class Char :
-public VisibleGameObject
+class Char : public VisibleGameObject
 {
 public:
-	Char(float h=10.0,float mh=10.0);
-	~Char();
-	virtual void Draw(sf::RenderWindow& rw);
+    Char(float, float, float, float);
+    ~Char();
+    virtual void Draw(sf::RenderWindow& rw);
     virtual void ModHealth(float);
     float GetHealth();
     float GetMaxHealth();

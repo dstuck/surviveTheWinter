@@ -16,12 +16,10 @@
 #include <time.h>
 
 
-AIChar::AIChar():
-_totalTime(0.0),
-_velocity(0.0,0.0),
-_maxSpeed(400.0f),
-_curSpeed(400.0f),
-Char(50.0,50.0)
+AIChar::AIChar(float x, float y) : Char(50.0, 50.0, x, y), _totalTime(0.0),
+                                   _velocity(0.0,0.0), _maxSpeed(400.0f),
+                                   _curSpeed(400.0f)
+
 {
     sf::Vector2f zeroV(0,0);
     _curMove = new MoveWalk(zeroV,1);

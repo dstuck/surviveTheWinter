@@ -43,10 +43,11 @@ void VisibleGameObject::Update(float elapsedTime)
 
 void VisibleGameObject::SetPosition(float x, float y)
 {
-	if(_isLoaded)
-	{
-		_sprite.setPosition(x,y);
-	}
+    _sprite.setPosition(x,y);
+//	if(_isLoaded)
+//	{
+//		_sprite.setPosition(x,y);
+//	}
 }
 
 sf::Vector2f VisibleGameObject::GetPosition() const
