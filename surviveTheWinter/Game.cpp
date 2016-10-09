@@ -103,6 +103,15 @@ void Game::GameLoop()
 
             break;
         }
+        case Game::Uninitialized: {
+            break;
+        }
+        case Game::Paused: {
+            break;
+        }
+        case Game::Exiting: {
+            break;
+        }
 	}
 }
 
@@ -125,6 +134,8 @@ void Game::ShowMenu()
 		case MainMenu::Play:
 			_gameState = Game::Playing;
 			break;
+        case MainMenu::Nothing:
+            break;
 	}
 }
 
