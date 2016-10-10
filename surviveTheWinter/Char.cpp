@@ -6,12 +6,14 @@
 //  Copyright (c) 2015 David Stuck. All rights reserved.
 //
 
+#include "VectorUtil.h"
 #include "Char.h"
 #include "stdafx.h"
 #include "Game.h"
 
-Char::Char(float h, float mh, float x, float y)
-    : _health(h), _maxHealth(mh), VisibleGameObject(true)
+Char::Char(float h, float mh, float x, float y, float att, float def)
+    : ActiveObject(x, y, true), _health(h), _maxHealth(mh), _att_val(att), _def_val(def),
+      _danger_dir(0, 0)
 {
     SetPosition(x, y);
 }
@@ -42,13 +44,22 @@ void Char::Draw(sf::RenderWindow & rw)
     rw.draw(healthBar);
 }
 
+bool Char::GetAttacked(Char * attacker) {
+    float damage = attacker->_att_val - _def_val;
+    ModHealth(std::min(-damage, 0.0f));
+    sf::Vector2f bias = GetPosition() - attacker->GetPosition();
+    VectorUtil::VNormalize(bias);
+    VectorUtil::VScale(bias, damage);
+    _danger_dir += bias;
+    return true;
+}
+
 void Char::ModHealth(float change) {
     _health += change;
     if(_health>_maxHealth){
         _health=_maxHealth;
     }
     else if(_health<0){
-//        std::cout << "AI Died!" << std::endl;
         _health = 0;
     }
 }
@@ -82,14 +93,12 @@ void Char::CharMove(sf::Vector2f vec) {
     GetSprite().move(vec);
     bool stopped = false;
     
+// Loop through solid objects to make sure not hitting any
     std::map<std::string, VisibleGameObject*> map = Game::GetGameObjectManager().GetMap();
     for(std::map<std::string, VisibleGameObject*>::const_iterator iter = map.begin(); iter!=map.end(); iter++) {
         if(iter->second->IsSolid()) {
             stopped = true;
-//            std::cout << "Position of " << iter->first <<  " is (" << iter->second->GetPosition().x << "," << iter->second->GetPosition().y << ")" << std::endl;
-//            std::cout << "Touching is " << IsTouching(*(iter->second)) << std::endl;
             if((this!=iter->second)&&IsTouching(*(iter->second),0.)) {
-//                std::cout << "Touching " << iter->first << std::endl;
                 if(IsAbove(*(iter->second),0.) && vec.y > 0.0) {
                     vec.y = 0.0;
                 }

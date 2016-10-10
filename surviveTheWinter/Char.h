@@ -10,23 +10,29 @@
 #define __surviveTheWinter__Char__
 
 #include <iostream>
-#include "VisibleGameObject.h"
+#include "ActiveObject.h"
 #include "AIMove.h"
 
-class Char : public VisibleGameObject
+class Char : public ActiveObject
 {
 public:
-    Char(float, float, float, float);
+    Char(float, float, float, float, float att=0.0, float def=0.0);
     ~Char();
     virtual void Draw(sf::RenderWindow& rw);
-    virtual void ModHealth(float);
+    virtual bool GetAttacked(Char *);
     float GetHealth();
     float GetMaxHealth();
 
 protected:
     void CharMove(sf::Vector2f);
+    virtual void ModHealth(float);
+    
+//private:
+    sf::Vector2f _danger_dir;
     float _health;
     float _maxHealth;
+    float _att_val;
+    float _def_val;
 };
 
 

@@ -12,8 +12,8 @@ void Game::Start(void)
     _mainWindow.setKeyRepeatEnabled(false);
     
     PlayerChar *player1 = new PlayerChar((1024/2), (768/2));
-    AIChar *ai1 = new AIChar((1024*.75),(768*.2));
-    EnemyChar *enemy1 = new EnemyChar(100,100);
+    AIChar *ai1 = new AIChar((1024*.75), (768*.2));
+    EnemyChar *enemy1 = new EnemyChar(100, 100);
 //    player1->SetPosition((1024/2),(768/2));
 //    ai1->SetPosition((1024*.75),(768*.2));
 //    enemy1->SetPosition(100,100);

@@ -17,37 +17,24 @@
 #include <time.h>
 
 
-EnemyChar::EnemyChar(float x, float y) : _totalTime(0.0), _velocity(0.0,0.0),
-                                         _maxSpeed(400.0f), _curSpeed(400.0f),
-                                         Char(50.0, 50.0, x, y)
+EnemyChar::EnemyChar(float x, float y) : Char(50.0, 50.0, x, y, 5, 0),
+                                         _total_time(0.0), _velocity(0.0,0.0),
+                                         _max_speed(400.0f), _cur_speed(400.0f),
+                                         _attack_cool_time(0.0f), _attack_delay(1.0f)
 {
     sf::Vector2f zeroV(0,0);
     _curMove = new MoveWalk(zeroV,1);
-    _decisionTime = _curMove->GetTime();
+    _decision_time = _curMove->GetTime();
 	Load(resourcePath() + "enemy.jpg");
 	assert(IsLoaded());
     srand (time(NULL));
     
 	GetSprite().setOrigin(GetSprite().getGlobalBounds().width/2, GetSprite().getGlobalBounds().height/2);
-    
 }
 
 EnemyChar::~EnemyChar()
 {
 }
-
-//void EnemyChar::Draw(sf::RenderWindow & rw)
-//{
-//	VisibleGameObject::Draw(rw);
-//    //Draw health bar
-//    sf::Vector2f rectVec(_health,10);
-//    sf::RectangleShape healthBar(rectVec);
-//    healthBar.setFillColor(sf::Color::Green);
-//    healthBar.setOutlineColor(sf::Color::Black);
-//    healthBar.setOrigin(_maxHealth/2,5);
-//    healthBar.setPosition(GetPosition().x,GetPosition().y + GetSprite().getGlobalBounds().height/2.0 + 10);
-//    rw.draw(healthBar);
-//}
 
 sf::Vector2f EnemyChar::GetVelocity() const
 {
@@ -59,16 +46,15 @@ AIMove * EnemyChar::GetNextMove() {
         delete _curMove;
     }
     
-    double timeRange = 0.3;
-    double timeMid = 0.8;
-    double tooClose = 300.0;
+    float timeRange = 0.3;
+    float timeMid = 0.8;
     int speedRange = 100;
     sf::Vector2f bias(0,0);
     
     PlayerChar* thePlayer = dynamic_cast<PlayerChar*>(Game::GetGameObjectManager().Get("Player1"));
     if(thePlayer!=NULL) {
         sf::Vector2f pVec = thePlayer->GetPosition();
-        float pDist = VectorUtil::VDist(pVec, GetPosition());
+//        float pDist = VectorUtil::VDist(pVec, GetPosition());
         
         bias = GetPosition()-pVec;
         VectorUtil::VNormalize(bias);
@@ -82,51 +68,37 @@ AIMove * EnemyChar::GetNextMove() {
 
 void EnemyChar::Update(float elapsedTime)
 {
-    _totalTime += elapsedTime;
-    //    std::cout << "elapsedTime = "<<elapsedTime << std::endl;
-    _decisionTime -= elapsedTime;
-    //    std::cout << "decisionTime = "<< _decisionTime << std::endl;
-    if(_decisionTime <= 0.0) {
+    _total_time += elapsedTime;
+    _decision_time -= elapsedTime;
+    if(_attack_cool_time > 0.0) {
+        _attack_cool_time -= elapsedTime;
+    }
+    if(_decision_time <= 0.0) {
         _curMove = GetNextMove();
-        _decisionTime = _curMove->GetTime();
+        _decision_time = _curMove->GetTime();
     }
     _velocity = _curMove->GetVelocity();
     
-    //    _curMove->PrintMove();
-    
-//    sf::Vector2f pos = this->GetPosition();
-//    
-//	if(pos.x  < GetSprite().getGlobalBounds().width/2 && _velocity.x < 0) {
-//        _velocity.x = 0; // Stop at bound
-//    }
-//    if(pos.x > (Game::SCREEN_WIDTH - GetSprite().getGlobalBounds().width/2) && _velocity.x > 0) {
-//		_velocity.x = 0; // Stop at bound
-//	}
-//	if(pos.y  < GetSprite().getGlobalBounds().height/2 && _velocity.y < 0) {
-//        _velocity.y = 0; // Stop at bound
-//	}
-//    if(pos.y > (Game::SCREEN_HEIGHT - GetSprite().getGlobalBounds().height/2) && _velocity.y > 0) {
-//		_velocity.y = 0; // Stop at bound
-//	}
-//    
-    //    std::cout<<"velocity is ("<<_velocity.x<<","<<_velocity.y<<")"<<std::endl;
+//    _curMove->PrintMove();
     
 	CharMove(_velocity * elapsedTime);
     
 //    Damage everyone!
-    AIChar* theAI = dynamic_cast<AIChar*>(Game::GetGameObjectManager().Get("AI1"));
-//    std::cout << VectorUtil::VDist(GetPosition(),theAI->GetPosition()) << std::endl;
-    if(theAI!=NULL) {
-        if(IsTouching(*theAI,20)) {
-//            std::cout << "Touching!!" << std::endl;
-            theAI->ModHealth(-5*elapsedTime,GetPosition());
-       
+    if(_attack_cool_time <= 0.0) {
+        //TODO(DES): Make this a loop over visible ActiveObjects
+        AIChar* theAI = dynamic_cast<AIChar*>(Game::GetGameObjectManager().Get("AI1"));
+        if(theAI!=NULL) {
+            if(IsTouching(*theAI, 20)) {
+                theAI->GetAttacked(this);
+                _attack_cool_time = _attack_delay;
+            }
         }
-    }
-    PlayerChar* thePlayer = dynamic_cast<PlayerChar*>(Game::GetGameObjectManager().Get("Player1"));
-    if(thePlayer!=NULL) {
-        if(IsTouching(*thePlayer,20)) {
-            thePlayer->ModHealth(-10*elapsedTime);
+        PlayerChar* thePlayer = dynamic_cast<PlayerChar*>(Game::GetGameObjectManager().Get("Player1"));
+        if(thePlayer!=NULL) {
+            if(IsTouching(*thePlayer,20)) {
+                thePlayer->GetAttacked(this);
+                _attack_cool_time = _attack_delay;
+            }
         }
     }
 }

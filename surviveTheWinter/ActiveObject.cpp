@@ -9,12 +9,11 @@
 #include "Char.h"
 #include "ActiveObject.h"
 
-ActiveObject::ActiveObject(float x, float y) {
+ActiveObject::ActiveObject(float x, float y, bool solid) : VisibleGameObject(solid) {
     SetPosition(x, y);
 }
 
 ActiveObject::~ActiveObject() {
-    
 }
 
 bool ActiveObject::GetAttacked(Char *attacker) {

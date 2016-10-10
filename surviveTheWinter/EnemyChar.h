@@ -31,10 +31,12 @@ private:
     AIMove * GetNextMove();
     
     sf::Vector2f _velocity;
-	float _maxSpeed;
-    float _curSpeed;
-    float _totalTime;
-    float _decisionTime;
+	float _max_speed;
+    float _cur_speed;
+    float _total_time;
+    float _decision_time;
+    float _attack_cool_time;
+    float _attack_delay;
 //    float _health;
 //    float _maxHealth;
     AIMove * _curMove;

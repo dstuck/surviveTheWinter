@@ -19,18 +19,6 @@ PlayerChar::~PlayerChar()
 {
 }
 
-//void PlayerChar::Draw(sf::RenderWindow & rw)
-//{
-//	VisibleGameObject::Draw(rw);
-////Draw health bar
-//    sf::Vector2f rectVec(_health,10);
-//    sf::RectangleShape healthBar(rectVec);
-//    healthBar.setFillColor(sf::Color::Green);
-//    healthBar.setOutlineColor(sf::Color::Black);
-//    healthBar.setOrigin(_maxHealth/2,5);
-//    healthBar.setPosition(GetPosition().x,GetPosition().y + GetSprite().getGlobalBounds().height/2.0 + 10);
-//    rw.draw(healthBar);
-//}
 
 sf::Vector2f PlayerChar::GetVelocity() const
 {

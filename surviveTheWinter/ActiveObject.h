@@ -17,7 +17,7 @@ class Char;
 class ActiveObject : public VisibleGameObject
 {
 public:
-    ActiveObject(float, float);
+    ActiveObject(float, float, bool);
     ~ActiveObject();
     virtual bool GetAttacked(Char *);
     

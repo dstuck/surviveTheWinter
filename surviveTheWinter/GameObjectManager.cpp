@@ -74,6 +74,7 @@ void GameObjectManager::UpdateAll(sf::Time timeDelta)
 void GameObjectManager::RemoveDead() {
 //      Remove dead characters
     for(std::map<std::string,VisibleGameObject*>::const_iterator iter = _gameObjects.begin(); iter!=_gameObjects.end(); iter++) {
+        //TODO(DES): Have VisibleGameObject have an is_dead command
         if(dynamic_cast<Char*>(iter->second)!=NULL) {
             if(dynamic_cast<Char*>(iter->second)->GetHealth()<=0) {
                 delete iter->second;
