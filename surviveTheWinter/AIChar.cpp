@@ -96,13 +96,13 @@ void AIChar::Update(float elapsedTime)
     _decisionTime -= elapsedTime;
 //    std::cout << "decisionTime = "<< _decisionTime << std::endl;
     if(_danger_dir != sf::Vector2f(0, 0)) {
-        if(_curMove!=NULL){
+        if(_curMove != NULL){
             delete _curMove;
         }
         int speedRange = 100;
         sf::Vector2f moveVec(
-            rand()%(2*speedRange)-speedRange+100.0f * _danger_dir.x,
-            rand()%(2*speedRange)-speedRange+100.0f * _danger_dir.y
+            rand()%(2*speedRange) - speedRange - 100.0f*_danger_dir.x,
+            rand()%(2*speedRange) - speedRange - 100.0f*_danger_dir.y
         );
         MoveWalk *fleeMove = new MoveWalk(moveVec,.4);
         _curMove = fleeMove;

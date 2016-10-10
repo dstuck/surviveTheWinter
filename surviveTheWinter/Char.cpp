@@ -47,7 +47,7 @@ void Char::Draw(sf::RenderWindow & rw)
 bool Char::GetAttacked(Char * attacker) {
     float damage = attacker->_att_val - _def_val;
     ModHealth(std::min(-damage, 0.0f));
-    sf::Vector2f bias = GetPosition() - attacker->GetPosition();
+    sf::Vector2f bias = attacker->GetPosition() - GetPosition();
     VectorUtil::VNormalize(bias);
     VectorUtil::VScale(bias, damage);
     _danger_dir += bias;

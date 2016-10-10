@@ -11,12 +11,12 @@ GameObjectManager::GameObjectManager()
 
 GameObjectManager::~GameObjectManager()
 {
-	std::for_each(_gameObjects.begin(),_gameObjects.end(),GameObjectDeallocator());
+	std::for_each(_gameObjects.begin(), _gameObjects.end(), GameObjectDeallocator());
 }
 
 void GameObjectManager::Add(std::string name, VisibleGameObject* gameObject)
 {
-	_gameObjects.insert(std::pair<std::string,VisibleGameObject*>(name,gameObject));
+	_gameObjects.insert(std::pair<std::string,VisibleGameObject*>(name, gameObject));
 }
 
 void GameObjectManager::Remove(std::string name)
@@ -40,7 +40,7 @@ VisibleGameObject* GameObjectManager::Get(std::string name) const
 
 int GameObjectManager::GetObjectCount() const
 {
-	return _gameObjects.size();
+	return int(_gameObjects.size());
 }
 
 std::map<std::string, VisibleGameObject*> GameObjectManager::GetMap() const {
@@ -61,14 +61,12 @@ void GameObjectManager::UpdateAll(sf::Time timeDelta)
 {
     std::map<std::string,VisibleGameObject*>::const_iterator itr =
     _gameObjects.begin();
-//    float timeDelta = Game::GetWindow().getFrameTime();
     
     while(itr != _gameObjects.end())
     {
         itr->second->Update(timeDelta.asSeconds());
         itr++;
     }
-    
 }
 
 void GameObjectManager::RemoveDead() {

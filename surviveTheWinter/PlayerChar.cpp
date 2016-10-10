@@ -47,37 +47,11 @@ void PlayerChar::Update(float elapsedTime)
 	{
 		_velocity.y -= _curSpeed;
 	}
+
+    if(_danger_dir != sf::Vector2f(0.f, 0.f)) {
+        _velocity -= _danger_dir * _maxSpeed;
+        _danger_dir = sf::Vector2f(0.f, 0.f);
+    }
     
-//	if(_velocity > _maxSpeed)
-//		_velocity = _maxSpeed;
-//    
-//	if(_velocity < -_maxSpeed)
-//		_velocity = -_maxSpeed;
-//    
-//	sf::Vector2f pos = this->GetPosition();
-//    
-//	if(pos.x  < GetSprite().getGlobalBounds().width/2 && _velocity.x < 0) {
-//        _velocity.x = 0; // Stop at bound
-//    }
-//    if(pos.x > (Game::SCREEN_WIDTH - GetSprite().getGlobalBounds().width/2) && _velocity.x > 0) {
-//		_velocity.x = 0; // Stop at bound
-//	}
-//    
-//	if(pos.y  < GetSprite().getGlobalBounds().height/2 && _velocity.y < 0) {
-//        _velocity.y = 0; // Stop at bound
-//	}
-//    if(pos.y > (Game::SCREEN_HEIGHT - GetSprite().getGlobalBounds().height/2) && _velocity.y > 0) {
-//		_velocity.y = 0; // Stop at bound
-//	}
-//  Normalize _velocity
-//    if(_velocity.x !=0 && _velocity.y !=0) {
-//        _velocity.x /= 1.41421356;
-//        _velocity.y /= 1.41421356;
-//    }
-    
-//    std::cout<<"Player velocity is ("<<_velocity.x<<","<<_velocity.y<<")"<<std::endl;
-    
-//	ModHealth(-1*elapsedTime);
-//	GetSprite().move(_velocity * elapsedTime);
     CharMove(_velocity * elapsedTime);
 }

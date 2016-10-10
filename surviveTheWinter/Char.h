@@ -27,8 +27,9 @@ protected:
     void CharMove(sf::Vector2f);
     virtual void ModHealth(float);
     
-//private:
+
     sf::Vector2f _danger_dir;
+private:
     float _health;
     float _maxHealth;
     float _att_val;
