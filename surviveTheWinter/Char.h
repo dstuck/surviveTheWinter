@@ -10,10 +10,10 @@
 #define __surviveTheWinter__Char__
 
 #include <iostream>
-#include "ActiveObject.h"
+#include "VisibleGameObject.h"
 #include "AIMove.h"
 
-class Char : public ActiveObject
+class Char : public VisibleGameObject
 {
 public:
     Char(float, float, float, float, float att=0.0, float def=0.0);

@@ -2,10 +2,12 @@
 
 #include "stdafx.h"
 
+class Char;
+
 class VisibleGameObject
 {
 public:
-    VisibleGameObject(bool solid=false);
+    VisibleGameObject(float x=0, float y=0, bool solid=false);
     virtual ~VisibleGameObject();
     
     virtual void Load(std::string filename);
@@ -21,6 +23,7 @@ public:
     virtual bool IsRightOf(VisibleGameObject,float thresh = 0);
     virtual bool IsLeftOf(VisibleGameObject,float thresh = 0);
     virtual bool IsSolid();
+    virtual bool GetAttacked(Char *);
 
 protected:
     sf::Sprite& GetSprite();

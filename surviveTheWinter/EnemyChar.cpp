@@ -79,26 +79,16 @@ void EnemyChar::Update(float elapsedTime)
     }
     _velocity = _curMove->GetVelocity();
     
-//    _curMove->PrintMove();
-    
 	CharMove(_velocity * elapsedTime);
     
 //    Damage everyone!
     if(_attack_cool_time <= 0.0) {
-        //TODO(DES): Make this a loop over visible ActiveObjects
-        AIChar* theAI = dynamic_cast<AIChar*>(Game::GetGameObjectManager().Get("AI1"));
-        if(theAI!=NULL) {
-            if(IsTouching(*theAI, 20)) {
-                theAI->GetAttacked(this);
+        for(auto vis_obj: Game::GetGameObjectManager().GetMap()) {
+            if(IsTouching(*vis_obj.second, 20) and vis_obj.second!=this) {
+                vis_obj.second->GetAttacked(this);
                 _attack_cool_time = _attack_delay;
             }
         }
-        PlayerChar* thePlayer = dynamic_cast<PlayerChar*>(Game::GetGameObjectManager().Get("Player1"));
-        if(thePlayer!=NULL) {
-            if(IsTouching(*thePlayer,20)) {
-                thePlayer->GetAttacked(this);
-                _attack_cool_time = _attack_delay;
-            }
-        }
+
     }
 }

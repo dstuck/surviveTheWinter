@@ -30,7 +30,6 @@
 		3339E2621A61E5CD001A03F2 /* nice_music.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 3339E2611A61E5CD001A03F2 /* nice_music.ogg */; };
 		3339E2641A61E5CD001A03F2 /* sansation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3339E2631A61E5CD001A03F2 /* sansation.ttf */; };
 		3339E2661A61E5CD001A03F2 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3339E2651A61E5CD001A03F2 /* icon.png */; };
-		33B022FF1DAB07E0004E1CA4 /* ActiveObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33B022FD1DAB07E0004E1CA4 /* ActiveObject.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,8 +72,6 @@
 		3339E2611A61E5CD001A03F2 /* nice_music.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = nice_music.ogg; sourceTree = "<group>"; };
 		3339E2631A61E5CD001A03F2 /* sansation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sansation.ttf; sourceTree = "<group>"; };
 		3339E2651A61E5CD001A03F2 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		33B022FD1DAB07E0004E1CA4 /* ActiveObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ActiveObject.cpp; sourceTree = "<group>"; };
-		33B022FE1DAB07E0004E1CA4 /* ActiveObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActiveObject.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,8 +111,6 @@
 				3339E2571A61E5CD001A03F2 /* Supporting Files */,
 				33108DF01A61EC8500E80745 /* Game.cpp */,
 				33108DF11A61EC8500E80745 /* Game.h */,
-				33B022FD1DAB07E0004E1CA4 /* ActiveObject.cpp */,
-				33B022FE1DAB07E0004E1CA4 /* ActiveObject.h */,
 				33108DF31A61ED0200E80745 /* stdafx.cpp */,
 				33108DF41A61ED0200E80745 /* stdafx.h */,
 				33108DF61A61F03A00E80745 /* SplashScreen.cpp */,
@@ -257,7 +252,6 @@
 				33108DFE1A61F4AA00E80745 /* MainMenu.cpp in Sources */,
 				33108E201A64F1AE00E80745 /* EnemyChar.cpp in Sources */,
 				33108E091A625D6400E80745 /* PlayerChar.cpp in Sources */,
-				33B022FF1DAB07E0004E1CA4 /* ActiveObject.cpp in Sources */,
 				33108E111A635B9500E80745 /* AIChar.cpp in Sources */,
 				33108DF51A61ED0200E80745 /* stdafx.cpp in Sources */,
 				33108E161A63619100E80745 /* AIMove.cpp in Sources */,

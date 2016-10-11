@@ -1,12 +1,13 @@
 //#include "stdafx.h"
+#include "Char.h"
 #include "VisibleGameObject.h"
 #include <cmath>
 
-VisibleGameObject::VisibleGameObject(bool solid) :
+VisibleGameObject::VisibleGameObject(float x, float y, bool solid) :
 _isLoaded(false),_isSolid(solid)
 {
+    SetPosition(x, y);
 }
-
 
 VisibleGameObject::~VisibleGameObject()
 {
@@ -91,7 +92,10 @@ bool VisibleGameObject::IsRightOf(VisibleGameObject obj, float thresh) {
     return ((fabs(GetPosition().y-obj.GetPosition().y) < GetSprite().getGlobalBounds().height/2+obj.GetSprite().getGlobalBounds().height/2 + thresh) && GetPosition().x > obj.GetPosition().x);
 }
 
-
 bool VisibleGameObject::IsSolid() {
     return _isSolid;
+}
+
+bool VisibleGameObject::GetAttacked(Char *attacker) {
+    return false;
 }
