@@ -77,7 +77,7 @@ void Char::CharMove(sf::Vector2f vec) {
     sf::Vector2f pos = this->GetPosition();
     if(pos.x + vec.x < GetSprite().getGlobalBounds().width/2 && vec.x < 0) {
         vec.x = 0; // Stop at bound
-    }
+}
     if(pos.x + vec.x > (Game::SCREEN_WIDTH - GetSprite().getGlobalBounds().width/2) && vec.x > 0) {
 		vec.x = 0; // Stop at bound
 	}

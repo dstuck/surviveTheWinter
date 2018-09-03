@@ -26,7 +26,7 @@ AIChar::AIChar(float x, float y) : Char(50.0, 50.0, x, y), _totalTime(0.0),
     _decisionTime = _curMove->GetTime();
 	Load(resourcePath() + "monster.jpg");
 	assert(IsLoaded());
-    srand(time(NULL));
+    srand(static_cast<unsigned>(time(NULL)));
     
 	GetSprite().setOrigin(GetSprite().getGlobalBounds().width/2, GetSprite().getGlobalBounds().height/2);
     
@@ -35,19 +35,6 @@ AIChar::AIChar(float x, float y) : Char(50.0, 50.0, x, y), _totalTime(0.0),
 AIChar::~AIChar()
 {
 }
-
-//void AIChar::Draw(sf::RenderWindow & rw)
-//{
-//	VisibleGameObject::Draw(rw);
-//    //Draw health bar
-//    sf::Vector2f rectVec(_health,10);
-//    sf::RectangleShape healthBar(rectVec);
-//    healthBar.setFillColor(sf::Color::Green);
-//    healthBar.setOutlineColor(sf::Color::Black);
-//    healthBar.setOrigin(_maxHealth/2,5);
-//    healthBar.setPosition(GetPosition().x,GetPosition().y + GetSprite().getGlobalBounds().height/2.0 + 10);
-//    rw.draw(healthBar);
-//}
 
 sf::Vector2f AIChar::GetVelocity() const
 {

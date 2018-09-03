@@ -27,7 +27,7 @@ EnemyChar::EnemyChar(float x, float y) : Char(50.0, 50.0, x, y, 5, 0),
     _decision_time = _curMove->GetTime();
 	Load(resourcePath() + "enemy.jpg");
 	assert(IsLoaded());
-    srand (time(NULL));
+    srand(static_cast<unsigned>(time(NULL)));
     
 	GetSprite().setOrigin(GetSprite().getGlobalBounds().width/2, GetSprite().getGlobalBounds().height/2);
 }
@@ -54,7 +54,6 @@ AIMove * EnemyChar::GetNextMove() {
     PlayerChar* thePlayer = dynamic_cast<PlayerChar*>(Game::GetGameObjectManager().Get("Player1"));
     if(thePlayer!=NULL) {
         sf::Vector2f pVec = thePlayer->GetPosition();
-//        float pDist = VectorUtil::VDist(pVec, GetPosition());
         
         bias = GetPosition()-pVec;
         VectorUtil::VNormalize(bias);
