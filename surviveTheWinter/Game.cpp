@@ -7,20 +7,22 @@ void Game::Start(void)
 {
     if(_gameState != Uninitialized)
         return;
-    
-    _mainWindow.create(sf::VideoMode(1024,768,32),"Pang!");
+
+    constexpr float SCREEN_WIDTH = 1024;
+    constexpr float SCREEN_HEIGHT = 768;
+
+    _mainWindow.create(sf::VideoMode(static_cast<int>(SCREEN_WIDTH), static_cast<int>(SCREEN_HEIGHT), 32),"Pang!");
     _mainWindow.setKeyRepeatEnabled(false);
     
-    PlayerChar *player1 = new PlayerChar((1024/2), (768/2));
-    AIChar *ai1 = new AIChar((1024*.75), (768*.2));
-    EnemyChar *enemy1 = new EnemyChar(100, 100);
-//    player1->SetPosition((1024/2),(768/2));
-//    ai1->SetPosition((1024*.75),(768*.2));
-//    enemy1->SetPosition(100,100);
+    PlayerChar *player1 = new PlayerChar((SCREEN_WIDTH/2), (SCREEN_HEIGHT/2));
+    AIChar *ai1 = new AIChar((SCREEN_WIDTH*.75), (SCREEN_HEIGHT*.2));
+    EnemyChar *enemy1 = new EnemyChar((SCREEN_WIDTH*0.1), (SCREEN_HEIGHT*0.2));
+    FoodObject *food1 = new FoodObject((SCREEN_WIDTH*0.8), (SCREEN_HEIGHT*0.8));
 	
-    _gameObjectManager.Add("Player1",player1);
-    _gameObjectManager.Add("AI1",ai1);
-    _gameObjectManager.Add("enemy1",enemy1);
+    _gameObjectManager.Add("Player1", player1);
+    _gameObjectManager.Add("AI1", ai1);
+    _gameObjectManager.Add("Enemy1", enemy1);
+    _gameObjectManager.Add("Food1", food1);
     _gameState= Game::ShowingSplash;
     
     while(!IsExiting())

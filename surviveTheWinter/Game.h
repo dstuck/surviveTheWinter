@@ -15,6 +15,7 @@
 #include "PlayerChar.h"
 #include "AIChar.h"
 #include "EnemyChar.h"
+#include "FoodObject.h"
 #include "GameObjectManager.h"
 
 
