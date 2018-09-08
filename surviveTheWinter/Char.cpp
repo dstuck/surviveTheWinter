@@ -15,7 +15,6 @@ Char::Char(float h, float mh, float x, float y, float att, float def)
     : VisibleGameObject(x, y, true), _health(h), _maxHealth(mh), _att_val(att), _def_val(def),
       _danger_dir(0, 0)
 {
-    SetPosition(x, y);
 }
 
 Char::~Char()

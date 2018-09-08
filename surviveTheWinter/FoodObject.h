@@ -9,9 +9,10 @@
 #ifndef FoodObject_h
 #define FoodObject_h
 
+#include "Carriable.hpp"
 #include "VisibleGameObject.h"
 
-class FoodObject : public VisibleGameObject
+class FoodObject : public Carriable< VisibleGameObject >
 {
 public:
     FoodObject(float, float);
@@ -20,11 +21,6 @@ public:
 protected:
     void CharMove(sf::Vector2f);
 
-private:
-    float _health;
-    float _maxHealth;
-    float _att_val;
-    float _def_val;
 };
 
 

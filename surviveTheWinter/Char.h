@@ -22,11 +22,10 @@ public:
     virtual bool GetAttacked(Char *);
     float GetHealth();
     float GetMaxHealth();
+    void CharMove(sf::Vector2f);
 
 protected:
-    void CharMove(sf::Vector2f);
     virtual void ModHealth(float);
-    
 
     sf::Vector2f _danger_dir;
 private:
