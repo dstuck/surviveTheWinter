@@ -35,8 +35,8 @@ private:
     float _cur_speed;
     float _total_time;
     float _decision_time;
-    float _attack_cool_time;
-    float _attack_delay;
+    float _attack_cool_time = 0.0;
+    float _attack_delay = 1.0;
 //    float _health;
 //    float _maxHealth;
     AIMove * _curMove;

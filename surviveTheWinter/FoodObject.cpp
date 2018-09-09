@@ -11,7 +11,7 @@
 #include "Game.h"
 
 FoodObject::FoodObject(float x, float y)
-    : VisibleGameObject(x, y, true)
+    : Char(100, 100, x, y, true)
 {
     Load(resourcePath() + "apple.jpg");
     assert(IsLoaded());

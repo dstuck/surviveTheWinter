@@ -17,7 +17,7 @@ template< class T >
 class Carriable : virtual public T
 {
 public:
-    bool pick_me_up(VisibleGameObject* carrier) {
+    bool PickMeUp(VisibleGameObject* carrier) {
         if(_carrier != NULL) {
             return false;
         }
@@ -26,7 +26,7 @@ public:
             return true;
         }
     };
-    bool put_me_down(VisibleGameObject* carrier) {
+    bool PutMeDown(VisibleGameObject* carrier) {
         if(_carrier != carrier) {
             return false;
         }
@@ -35,7 +35,6 @@ public:
             return true;
         }
     };
-
     
 private:
     VisibleGameObject* _carrier = NULL;

@@ -24,6 +24,8 @@ public:
     virtual bool IsLeftOf(VisibleGameObject,float thresh = 0);
     virtual bool IsSolid();
     virtual bool GetAttacked(Char *);
+    virtual bool PickMeUp(VisibleGameObject* carrier);
+    virtual bool PutMeDown(VisibleGameObject* carrier);
 
 protected:
     sf::Sprite& GetSprite();

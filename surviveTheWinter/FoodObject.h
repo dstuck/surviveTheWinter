@@ -10,17 +10,16 @@
 #define FoodObject_h
 
 #include "Carriable.hpp"
-#include "VisibleGameObject.h"
+#include "Char.h"
 
-class FoodObject : public Carriable< VisibleGameObject >
+class FoodObject : public Carriable< Char >
 {
 public:
-    FoodObject(float, float);
+    FoodObject(float x, float y);
     ~FoodObject();
     
 protected:
     void CharMove(sf::Vector2f);
-
 };
 
 

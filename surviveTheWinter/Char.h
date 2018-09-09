@@ -16,23 +16,23 @@
 class Char : public VisibleGameObject
 {
 public:
-    Char(float, float, float, float, float att=0.0, float def=0.0);
+    Char(float=0, float=0, float=0, float=0, float att=0.0, float def=0.0);
     ~Char();
     virtual void Draw(sf::RenderWindow& rw);
     virtual bool GetAttacked(Char *);
     float GetHealth();
     float GetMaxHealth();
-    void CharMove(sf::Vector2f);
+    sf::Vector2f CharMove(sf::Vector2f);
 
 protected:
     virtual void ModHealth(float);
 
     sf::Vector2f _danger_dir;
 private:
-    float _health;
-    float _maxHealth;
-    float _att_val;
-    float _def_val;
+    float _health = 0;
+    float _maxHealth = 0;
+    float _att_val = 0;
+    float _def_val = 0;
 };
 
 

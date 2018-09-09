@@ -19,8 +19,7 @@
 
 EnemyChar::EnemyChar(float x, float y) : Char(50.0, 50.0, x, y, 5, 0),
                                          _total_time(0.0), _velocity(0.0,0.0),
-                                         _max_speed(400.0f), _cur_speed(400.0f),
-                                         _attack_cool_time(0.0f), _attack_delay(1.0f)
+                                         _max_speed(400.0f), _cur_speed(400.0f)
 {
     sf::Vector2f zeroV(0,0);
     _curMove = new MoveWalk(zeroV,1);

@@ -71,7 +71,7 @@ float Char::GetMaxHealth() {
     return _maxHealth;
 }
 
-void Char::CharMove(sf::Vector2f vec) {
+sf::Vector2f Char::CharMove(sf::Vector2f vec) {
 //    Make sure not blocked by anything
     sf::Vector2f pos = this->GetPosition();
     if(pos.x + vec.x < GetSprite().getGlobalBounds().width/2 && vec.x < 0) {
@@ -96,8 +96,8 @@ void Char::CharMove(sf::Vector2f vec) {
     std::map<std::string, VisibleGameObject*> map = Game::GetGameObjectManager().GetMap();
     for(std::map<std::string, VisibleGameObject*>::const_iterator iter = map.begin(); iter!=map.end(); iter++) {
         if(iter->second->IsSolid()) {
-            stopped = true;
             if((this!=iter->second)&&IsTouching(*(iter->second),0.)) {
+                stopped = true;
                 if(IsAbove(*(iter->second),0.) && vec.y > 0.0) {
                     vec.y = 0.0;
                 }
@@ -117,6 +117,7 @@ void Char::CharMove(sf::Vector2f vec) {
         GetSprite().move(-storedVec);
         GetSprite().move(vec);
     }
+    return vec;
 }
 
 

@@ -99,3 +99,11 @@ bool VisibleGameObject::IsSolid() {
 bool VisibleGameObject::GetAttacked(Char *attacker) {
     return false;
 }
+
+bool VisibleGameObject::PickMeUp(VisibleGameObject* carrier) {
+    return false;
+}
+
+bool VisibleGameObject::PutMeDown(VisibleGameObject* carrier) {
+    return false;
+}
